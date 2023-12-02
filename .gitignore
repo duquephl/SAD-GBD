@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+#Pastas do CAGED
+ANTIGO_CAGED/
+NOVO_CAGED/
+
 # Distribution / packaging
 .Python
 build/
