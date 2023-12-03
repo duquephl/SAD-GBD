@@ -1,51 +1,44 @@
 create table dRaca(
 	IdRaca integer not null,
-	Sigla integer not null,
-	Descricao varchar(17) not null,
+	Descricao varchar(255),
 	constraint pkRaca primary key (IdRaca)
 );
 
 create table dDeficiencia(
 	IdDeficiencia integer not null,
-	Sigla integer not null,
-	Descricao varchar(21),
+	Descricao varchar(255),
 	constraint pkDeficiencia primary key (IdDeficiencia)
 );
 
 create table dSexo(
 	IdSexo integer not null,
-	Sigla integer not null,
-	Descricao varchar(17),
+	Descricao varchar(255),
 	constraint pkSexo primary key (IdSexo)
 );
 
 create table dTipoEmpregador(
 	IdTipoEmpregador integer not null,
-	Sigla integer not null,
-	Descricao varchar(21),
+	Descricao varchar(255),
 	constraint pkTipoEmpregador primary key (IdTipoEmpregador)
 );
 
 create table dEscolaridade(
 	IdEscolaridade integer not null,
-	Sigla integer not null,
-	Descricao varchar(24),
+	Descricao varchar(255),
 	constraint pkEscolaridade primary key (IdEscolaridade)
 );
 
 create table dMotivoMovimentacao(
 	IdMotivoMovimentacao integer not null,
-	Sigla integer not null,
-	Descricao varchar(53),
+	Descricao varchar(255),
 	constraint pkMotivoMovimentacao primary key (IdMotivoMovimentacao)
 );
 
 create table dLocalizacao(
 	IdLocalizacao integer not null,
-	RegiaoGeografica varchar(17) not null,
-	UnidadeFederativa varchar(20) not null,
-	Municipio varchar(36) not null,
-	IDH integer not null,
+	RegiaoGeografica varchar(255) not null,
+	UnidadeFederativa varchar(255) not null,
+	Municipio varchar(255) not null,
 	constraint pkLocalizacao primary key (IdLocalizacao)
 );
 
@@ -57,17 +50,14 @@ create table dTempo(
 );
 
 create table dCargoDoEmpregado(
-	IdCargoDoEmpregado integer not null,
-	Sigla integer not null,
-	Cbo2002Ocupacao varchar(137) not null,
-	constraint pkCargoDoEmpregado primary key (IdCargoDoEmpregado)
+	IdCBCO2002 integer not null,
+	Descricao varchar(255),
+	constraint pkCargoDoEmpregado primary key (IdCBCO2002)
 );
 
 create table dSetorDoEmpregador(
 	IdSetorDoEmpregador integer not null,
-	Sigla integer not null,
-	Secao varchar(65) not null,
-	Subclasse varchar(151) not null,
+	Descricao varchar(255),
 	constraint pkSetorDoEmpregador primary key (IdSetorDoEmpregador)
 );
 
@@ -76,18 +66,17 @@ create table fMovimentacao(
 	IdLocalizacao integer not null,
 	IdTipoEmpregador integer not null,
 	IdEscolaridade integer not null,
-	IdMotivoMovimentacao integer not null,
 	IdCargoDoEmpregado integer not null,
 	IdSetorDoEmpregador integer not null,
+	IdMotivoMovimentacao integer not null,
 	IdRaca integer not null,
 	IdSexo integer not null,
 	IdDeficiencia integer not null,
 	Idade integer not null,
 	Salario real not null,
-	ValorSalarioFixo real not null,
 	HorasContratuaisSemanais integer not null,
 	TipoMovimentacao integer not null, /*Pode ser 1 ou -1*/
-	Indtrabintermitente integer not null,
+	
 	constraint pkMovimentacao primary key (IdTempo, IdLocalizacao, IdTipoEmpregador, IdEscolaridade,
 IdMotivoMovimentacao, IdCargoDoEmpregado, IdSetorDoEmpregador, IdRaca, IdSexo, IdDeficiencia),
 	constraint fkMovimentacaoTempo foreign key (IdTempo) references dTempo(IdTempo),
@@ -97,7 +86,7 @@ dTipoEmpregador(IdTipoEmpregador),
 	constraint fkMovimentacaoEscolaridade foreign key (IdEscolaridade) references
 dEscolaridade(IdEscolaridade),
 	constraint fkMovimentacaoCargoDoEmpregado foreign key (IdCargoDoEmpregado) references
-dCargoDoEmpregado(IdCargoDoEmpregado),
+dCargoDoEmpregado(IdCBCO2002),
 	constraint fkMovimentacaoSetorDoEmpregador foreign key (IdSetorDoEmpregador) references
 dSetorDoEmpregador(IdSetorDoEmpregador),
 	constraint fkMovimentacaoRaca foreign key (IdRaca) references dRaca(IdRaca),
